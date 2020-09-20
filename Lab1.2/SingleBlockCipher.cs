@@ -15,29 +15,24 @@ namespace Lab1._2
             }
             string localText = text + new string(' ', remainder);
 
-            string decryptedText = string.Empty;
-            for (int i = 0; i < localText.Length / lengthOfBlock; i++)
-            {
-                for (int j = 0; j < lengthOfBlock; j++)
-                {
-                    int position = key[j];
-                    decryptedText += localText[i * lengthOfBlock + position];
-                }
-            }
-
-            return decryptedText;
+            return CreateResult(localText, key, key.ElementAt);
         }
 
         public string Decrypt(string encryptedText, List<int> key)
         {
+            return CreateResult(encryptedText, key, key.IndexOf);
+        }
+
+        private string CreateResult(string text, List<int> key, Func<int, int> func)
+        {
             int lengthOfBlock = key.Count;
             string decryptedText = string.Empty;
-            for (int i = 0; i < encryptedText.Length / lengthOfBlock; i++)
+            for (int i = 0; i < text.Length / lengthOfBlock; i++)
             {
                 for (int j = 0; j < lengthOfBlock; j++)
                 {
-                    int position = key.IndexOf(j);
-                    decryptedText += encryptedText[i * lengthOfBlock + position];
+                    int position = func(j);
+                    decryptedText += text[i * lengthOfBlock + position];
                 }
             }
 

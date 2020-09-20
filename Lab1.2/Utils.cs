@@ -18,5 +18,10 @@ namespace Lab1._2
                 list[n] = value;
             }
         }
+
+        public static T ElementAt<T>(this List<T> list, int i)
+        {
+            return list[i];
+        }
     }
 }
