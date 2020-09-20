@@ -16,23 +16,36 @@ namespace Lab1._2
             Console.WriteLine(encryptedText);
             Console.WriteLine(decryptedText);*/
 
-            string text = "Виходячи із смертельної небезпеки, яка нависла була над " +
+            /*string text = "Виходячи із смертельної небезпеки, яка нависла була над " +
                 "Україною в зв'язку з державним переворотом в СРСР 19 серпня 1991 року...";
             string key = "24 серпня 1991 рік";
             var moduleNCipher = new ModuleNCipher(AlphabetManager.FullMixedAlphabetList);
             var encryptedText = moduleNCipher.Encrypt(text, key);
             var decryptedText = moduleNCipher.Decrypt(encryptedText, key);
             Console.WriteLine(encryptedText);
+            Console.WriteLine(decryptedText);*/
+
+            /*string text = "United States Declaration of Independence";
+            var module2Cipher = new Module2Cipher();
+            var key = module2Cipher.CreateRandomKey(5);
+            var encryptedText = module2Cipher.Encrypt(text, key);
+            var decryptedText = module2Cipher.Decrypt(encryptedText, key);
+            Console.WriteLine(encryptedText);
+            Console.WriteLine(decryptedText);*/
+
+            string text = "Рядки тастовбці";
+            var multiplePermutationCipher = new MultiplePermutationCipher();
+            int amountOfColumns = 4;
+            Table table = new Table(text, amountOfColumns);
+            table.PrintTable();
+            var keyNumbers = multiplePermutationCipher.CreatePermutationNumbers(table);
+            //var key = new Tuple<List<int>, List<int>>(new List<int>() { 3, 0, 1, 2 }, new List<int>() { 2, 0, 3, 1 });
+            var encryptedText = multiplePermutationCipher.Encrypt(table, keyNumbers);
+            table = new Table(encryptedText, amountOfColumns);
+            var decryptedText = multiplePermutationCipher.Decrypt(table, keyNumbers);
+            Console.WriteLine(encryptedText);
             Console.WriteLine(decryptedText);
         }
-    }
-
-    public enum Language
-    {
-        English,
-        Ukrainian,
-        Mixed,
-        FullMixed
     }
 
     public class AlphabetManager
@@ -83,22 +96,5 @@ namespace Lab1._2
             'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р',
             'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ь', 'Ю', 'Я'
         };
-
-        public static HashSet<char> DetermineAppropriateAlphabet(Language language)
-        {
-            if (language == Language.English)
-            {
-                return EnglishAphabet;
-            }
-            else if (language == Language.Ukrainian)
-            {
-                return UkrainianAlphabet;
-            }
-            else if (language == Language.Mixed)
-            {
-                return MixedAlphabet;
-            }
-            return FullMixedAlphabet;
-        }
     }
 }

@@ -19,16 +19,18 @@ namespace Lab1._2
             {
                 if (_selectedAlphabet.IndexOf(text[i]) != -1)
                 {
-                    char symbol = key[j++ % key.Length];
+                    char symbol = key[j % key.Length];
                     if (_selectedAlphabet.IndexOf(symbol) != -1)
                     {
-                        result += _selectedAlphabet[(_selectedAlphabet.IndexOf(symbol)
-                            + _selectedAlphabet.IndexOf(text[i])) % _selectedAlphabet.Count];
+                        int index = _selectedAlphabet.IndexOf(symbol) + _selectedAlphabet.IndexOf(text[i]);
+                        int position = index % _selectedAlphabet.Count;
+                        result += _selectedAlphabet[position];
                     }
                     else
                     {
                         result += _selectedAlphabet[_selectedAlphabet.IndexOf(text[i])];
                     }
+                    j += 1;
                 }
             }
             return result;
@@ -47,8 +49,10 @@ namespace Lab1._2
                         int difference = _selectedAlphabet.IndexOf(encryptedText[i]) - _selectedAlphabet.IndexOf(c);
                         if (difference < 0)
                         {
-                            result += _selectedAlphabet[(_selectedAlphabet.IndexOf(encryptedText[i]) +
-                                _selectedAlphabet.Count - _selectedAlphabet.IndexOf(c)) % _selectedAlphabet.Count];
+                            int firstIndex = _selectedAlphabet.IndexOf(encryptedText[i]);
+                            int secondIndex = _selectedAlphabet.Count - _selectedAlphabet.IndexOf(c);
+                            int position = (firstIndex + secondIndex) % _selectedAlphabet.Count;
+                            result += _selectedAlphabet[position];
                         }
                         else
                         {
@@ -57,11 +61,10 @@ namespace Lab1._2
                     }
                     else
                     {
-                        result += (_selectedAlphabet[_selectedAlphabet.IndexOf(encryptedText[i])]);
+                        result += _selectedAlphabet[_selectedAlphabet.IndexOf(encryptedText[i])];
                     }
                 }
             }
-
             return result;
         }
     }

@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Lab1._2Test
 {
     [TestClass]
-    public class UnitTest1
+    public class SingleBlockCipherTest
     {
         [TestMethod]
         public void SingleBlockCipherShouldWorkCorreclyForHugePhrases()
